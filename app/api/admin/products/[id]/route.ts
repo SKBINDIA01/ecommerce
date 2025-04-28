@@ -1,18 +1,6 @@
-import { getAuth } from '@clerk/nextjs/server';
 import prisma from '@/lib/db';
+import { isAdminFromRequest } from '@/lib/admin';
 import { NextRequest, NextResponse } from 'next/server';
-
-// Admin check middleware
-const isAdmin = async (req: NextRequest) => {
-  const { userId } = getAuth(req);
-  if (!userId) {
-    return false;
-  }
-  
-  // In a real application, you'd check if the user has admin role
-  // For now, we'll just check if the user is authenticated
-  return true;
-};
 
 // GET a single product (admin endpoint)
 export async function GET(
@@ -20,7 +8,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    if (!await isAdmin(request)) {
+    if (!await isAdminFromRequest(request)) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
@@ -54,7 +42,7 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
-    if (!await isAdmin(request)) {
+    if (!await isAdminFromRequest(request)) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
@@ -106,7 +94,7 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    if (!await isAdmin(request)) {
+    if (!await isAdminFromRequest(request)) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }

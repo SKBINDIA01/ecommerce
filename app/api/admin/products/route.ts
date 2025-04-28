@@ -1,35 +1,11 @@
-import { getAuth } from '@clerk/nextjs/server';
 import prisma from '@/lib/db';
+import { isAdminFromRequest, getUserRoleFromRequest } from '@/lib/admin';
 import { NextRequest, NextResponse } from 'next/server';
-
-// Admin check middleware
-const isAdmin = async (req: NextRequest) => {
-  const { userId } = getAuth(req);
-  console.log('Auth check - userId:', userId);
-  
-  if (!userId) {
-    console.log('Auth failed: No userId found');
-    return false;
-  }
-  
-  try {
-    // For demonstration purposes: treat all authenticated users as admins
-    // In a real application, you would check against a database of admin users
-    // Example: const isAdminUser = await prisma.user.findUnique({ where: { id: userId, role: 'ADMIN' } });
-    
-    // Just logging for debugging
-    console.log('User authenticated successfully, granted admin access');
-    return true;
-  } catch (error) {
-    console.error('Error checking admin status:', error);
-    return false;
-  }
-};
 
 // GET all products (admin endpoint)
 export async function GET(request: NextRequest) {
   try {
-    if (!await isAdmin(request)) {
+    if (!await isAdminFromRequest(request)) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
@@ -53,7 +29,7 @@ export async function GET(request: NextRequest) {
 // CREATE a new product (admin endpoint)
 export async function POST(request: NextRequest) {
   try {
-    if (!await isAdmin(request)) {
+    if (!await isAdminFromRequest(request)) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }

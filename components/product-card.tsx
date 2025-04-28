@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ShoppingCart, Heart } from "lucide-react"
+import { Heart } from "lucide-react"
+import AddToCartButton from "./add-to-cart-button"
 
 interface Product {
   id: string | number
@@ -48,10 +49,12 @@ export default function ProductCard({ product, hasDiscount = false }: ProductCar
       </Link>
 
       <div className="p-4 pt-0 flex space-x-2">
-        <button className="flex-1 bg-black hover:bg-gray-800 text-white py-2 rounded-md flex items-center justify-center transition-colors">
-          <ShoppingCart className="h-4 w-4 mr-1" />
-          Add to Cart
-        </button>
+        <AddToCartButton 
+          productId={String(product.id)}
+          name={product.name}
+          price={product.price}
+          image={product.image}
+        />
         <button className="w-10 h-10 border border-gray-300 rounded-md flex items-center justify-center hover:bg-gray-100 transition-colors">
           <Heart className="h-4 w-4" />
         </button>

@@ -21,6 +21,122 @@ export default async function CategoryPage({ params }: { params: { category: str
     });
   } catch (error) {
     console.error('Error fetching products:', error);
+    
+    // Fallback to mock data if API call fails
+    if (category === 'tshirts') {
+      products = [
+        {
+          id: 't1',
+          name: "Urban Graphic Tee",
+          description: "Stylish urban graphic t-shirt with premium quality fabric.",
+          category: "tshirts",
+          price: 29.99,
+          discountPercent: 10,
+          discountedPrice: 26.99,
+          frontImageUrl: "/placeholder.svg?height=400&width=300",
+          backImageUrl: "/placeholder.svg?height=400&width=300",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: 't2',
+          name: "Street Style Tee",
+          description: "Comfortable street style t-shirt for everyday wear.",
+          category: "tshirts",
+          price: 34.99,
+          discountPercent: null,
+          discountedPrice: null,
+          frontImageUrl: "/placeholder.svg?height=400&width=300",
+          backImageUrl: null,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: 't3',
+          name: "Casual Fit Tee",
+          description: "Relaxed fit casual t-shirt made with soft cotton.",
+          category: "tshirts",
+          price: 27.99,
+          discountPercent: 15,
+          discountedPrice: 23.79,
+          frontImageUrl: "/placeholder.svg?height=400&width=300",
+          backImageUrl: "/placeholder.svg?height=400&width=300",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: 't4',
+          name: "Vintage Print Tee",
+          description: "Classic vintage print t-shirt with retro design.",
+          category: "tshirts",
+          price: 32.99,
+          discountPercent: null,
+          discountedPrice: null,
+          frontImageUrl: "/placeholder.svg?height=400&width=300",
+          backImageUrl: null,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        }
+      ];
+    } else if (category === 'hoodies') {
+      products = [
+        {
+          id: 'h1',
+          name: "Classic Hoodie",
+          description: "Warm and comfortable classic hoodie for everyday wear.",
+          category: "hoodies",
+          price: 49.99,
+          discountPercent: null,
+          discountedPrice: null,
+          frontImageUrl: "/placeholder.svg?height=400&width=300",
+          backImageUrl: null,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: 'h2',
+          name: "Zip-up Hoodie",
+          description: "Convenient zip-up hoodie with premium quality fabric.",
+          category: "hoodies",
+          price: 54.99,
+          discountPercent: 10,
+          discountedPrice: 49.49,
+          frontImageUrl: "/placeholder.svg?height=400&width=300",
+          backImageUrl: "/placeholder.svg?height=400&width=300",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        }
+      ];
+    } else if (category === 'accessories') {
+      products = [
+        {
+          id: 'a1',
+          name: "Urban Backpack",
+          description: "Stylish urban backpack with multiple compartments.",
+          category: "accessories",
+          price: 39.99,
+          discountPercent: null,
+          discountedPrice: null,
+          frontImageUrl: "/placeholder.svg?height=400&width=300",
+          backImageUrl: null,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: 'a2',
+          name: "Designer Cap",
+          description: "Premium designer cap with embroidered logo.",
+          category: "accessories",
+          price: 24.99,
+          discountPercent: 15,
+          discountedPrice: 21.24,
+          frontImageUrl: "/placeholder.svg?height=400&width=300",
+          backImageUrl: null,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        }
+      ];
+    }
   }
   
   // Define the product type
